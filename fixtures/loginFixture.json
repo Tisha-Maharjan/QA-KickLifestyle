@@ -1,0 +1,14 @@
+{
+  "validUser": {
+    "Email": "tishaamaharjan@gmail.com",
+    "Password": "Tish@maharjan"
+  },
+  "invalidUser": {
+    "Email": "tishaamaharjan@gmail.com",
+    "Password": "Tish@maharjan",
+    "InvalidEmail": "maharjantisha@gmail.com",
+    "InvalidPassword": "Password12",
+    "EmptyEmail": "",
+    "EmptyPassword": ""
+  }
+}
