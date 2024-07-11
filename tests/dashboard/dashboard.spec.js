@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Dashboard CRUD", () => {
-  test.only("Add item", async ({ page }) => {
+  test("Add item", async ({ page }) => {
     const dashboard = new DashboardPage(page);
 
     await dashboard.addToCart("Shopping Cart");
