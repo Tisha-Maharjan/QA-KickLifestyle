@@ -12,15 +12,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Dashboard CRUD", () => {
-  test("Add item", async ({ page }) => {
+  test.only("Add item", async ({ page }) => {
     const dashboard = new DashboardPage(page);
 
-    // await dashboard.practiceMessage("Practice");
-    // // await dashboard.practiceMessage();
-    // await dashboard.TestException("Test Exceptions");
-
-    // await dashboard.CRUD_Operation("Row 2 was added");
-
-    // await dashboard.addItem(addData.additem.food);
+    await dashboard.addToCart("Shopping Cart");
+    await dashboard.removeItem();
   });
 });
