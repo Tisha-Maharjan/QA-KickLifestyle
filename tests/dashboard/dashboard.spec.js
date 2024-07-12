@@ -18,4 +18,9 @@ test.describe("Dashboard CRUD", () => {
     await dashboard.addToCart("Shopping Cart");
     await dashboard.removeItem();
   });
+
+  test.only("Multiple Add", async ({ page }) => {
+    const multipleAdd = new DashboardPage(page);
+    await multipleAdd.addMultipleItem();
+  });
 });
