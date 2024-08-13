@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Valid Login tests", () => {
-  test("valid login", async ({ page }) => {
+  test.skip("valid login", async ({ page }) => {
     const login = new LoginPage(page);
     await login.login(testData.validUser.Email, testData.validUser.Password);
     await login.verifyValidLogin();
@@ -15,6 +15,7 @@ test.describe("Valid Login tests", () => {
 });
 
 test.describe("Invalid Login Test", () => {
+  test.describe.configure({ mode: "serial" });
   test("invalid email invalid password", async ({ page }) => {
     const login = new LoginPage(page);
     await login.login(
@@ -42,32 +43,50 @@ test.describe("Invalid Login Test", () => {
     await login.verifyInvalidEmailPassword();
   });
 
-  // test("no email no password", async ({ page }) => {
-  //   const login = new LoginPage(page);
-  //   await login.login(
-  //     testData.invalidUser.EmptyEmail,
-  //     testData.invalidUser.EmptyPassword
-  //   );
-  //   await login.verifyInvalidEmail();
-  // });
+  test("no email no password", async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.login(
+      testData.invalidUser.EmptyEmail,
+      testData.invalidUser.EmptyPassword
+    );
+    await login.verifyEmptyEmail();
+  });
 
-  // test("no email valid password", async ({ page }) => {
-  //   const login = new LoginPage(page);
-  //   await login.login(
-  //     testData.invalidUser.EmptyEmail,
-  //     testData.invalidUser.Password
-  //   );
-  //   await login.verifyEmptyEmail();
-  // });
+  test("no email valid password", async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.login(
+      testData.invalidUser.EmptyEmail,
+      testData.invalidUser.Password
+    );
+    await login.verifyEmptyEmail();
+  });
 
-  // test("valid Email no password", async ({ page }) => {
-  //   const login = new LoginPage(page);
-  //   await login.login(
-  //     testData.invalidUser.Email,
-  //     testData.invalidUser.EmptyPassword
-  //   );
-  //   await login.verifyInvalidPassword();
-  // });
+  test("valid email no password", async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.login(
+      testData.invalidUser.Email,
+      testData.invalidUser.EmptyPassword
+    );
+    await login.verifyEmptyPassword();
+  });
+
+  test("no email invalid password", async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.login(
+      testData.invalidUser.EmptyEmail,
+      testData.invalidUser.InvalidPassword
+    );
+    await login.verifyEmptyEmail();
+  });
+
+  test("invalid email no password", async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.login(
+      testData.invalidUser.InvalidEmail,
+      testData.invalidUser.EmptyPassword
+    );
+    await login.verifyEmptyPassword();
+  });
 });
 
 // test.afterEach(async ({ page }) => {

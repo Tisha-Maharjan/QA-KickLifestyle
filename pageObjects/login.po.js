@@ -7,8 +7,8 @@ exports.LoginPage = class LoginPage {
     this.signinLogo = '//*[@id="page-header-inner"]/div[2]/div/div[3]/div/a[1]';
     this.email = '//*[@id="ip_user_login"]';
     this.password = '//*[@id="ip_password"]';
-    // this.emptyEmail = '//*[@id="__next"]/main/main/div/form/div[1]/p';
-    // this.emptyPassword = "";
+    this.emptyEmail = '//*[@id="ip_user_login-error"]';
+    this.emptyPassword = '//*[@id="ip_password-error"]';
     this.loginButton = '//*[@id="minimog-login-form"]/div[5]/button';
     this.validLoginValidation = '//a[contains(text(),"Dashboard")]';
 
@@ -16,7 +16,7 @@ exports.LoginPage = class LoginPage {
   }
 
   async login(email, password) {
-    await this.page.locator(this.cross).click();
+    // await this.page.locator(this.cross).click();
     await this.page.locator(this.signinLogo).click();
     await this.page.locator(this.email).fill(email);
     await this.page.locator(this.password).fill(password);
@@ -36,8 +36,14 @@ exports.LoginPage = class LoginPage {
   }
 
   async verifyEmptyEmail() {
-    await expect(this.page.locator(this.invalidLoginValidation)).toHaveText(
-      "Email is required"
+    await expect(this.page.locator(this.emptyEmail)).toHaveText(
+      "This field is required"
+    );
+  }
+
+  async verifyEmptyPassword() {
+    await expect(this.page.locator(this.emptyPassword)).toHaveText(
+      "This field is required"
     );
   }
 };
